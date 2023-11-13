@@ -1,0 +1,45 @@
+(* and bool b = (module struct
+  module Super = (val base : Obj)
+
+  let handle self = function
+    | "print", [] -> print_endline (string_of_bool b); nil
+    | "not", [] -> bool (not b)
+    | msg ->  Super.handle self msg
+
+  let truthy _ = b
+end : Obj) *)
+
+  let handle self = function
+    | "print", [] -> print_endline (string_of_int x); nil
+    | "isZero", [] -> bool (x == 0)
+    | "isPositive", [] -> bool (x > 0)
+    | "pred", [] -> int (x - 1)
+    | "succ", [] -> int (x + 1)
+    | "negate", [] -> int (-x)
+    | "equals", [y] ->
+        if x == 0 then
+          y*"isZero"/[]
+        else if x < 0 then
+          int x
+            *"negate"/[]
+            *"equals"/[y*"negate"/[]]
+        else
+          int x
+            *"pred"/[]
+            *"equals"/[y*"pred"/[]]
+    | "add", [y] ->
+        if x == 0 then
+          y
+        else if x < 0 then
+          int x
+            *"negate"/[]
+            *"add"/[y*"negate"/[]]
+            *"negate"/[]
+        else
+          int x
+            *"pred"/[]
+            *"add"/[y*"succ"/[]]
+    | msg -> Super.handle self msg
+
+  let truthy _ = x != 0
+end : Obj)

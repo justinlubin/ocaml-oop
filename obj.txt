@@ -1,0 +1,28 @@
+(* extends <obj> ~> module Super = (val <obj> : Obj) *)
+(* super.<head>(<args>) ~> Super.handle self (<head>, <args>) *)
+(* handle ~> let handle self = function\n *)
+(* ? -> ~> _ -> Super.handle self msg\n let truthy self = *)
+(* .<heaed>(<args>) -> |> d "<head>" [<args>] *)
+(* x ||| y ~> x ||| (fun _ -> y) *)
+
+(* object bool(b) extends base {
+  def print():
+    print_endline (string_of_bool b);
+    nil
+
+  def not():
+    not b
+
+  ? = b 
+} *)
+
+(* object insert(x, inner) extends empty {
+  def contains(y):
+    super.contains(y);
+    x.equals(y) ||| inner.contains(y)
+
+  def union(other):
+    insert(x, inner.union(other))
+
+  ? = true
+} *)
